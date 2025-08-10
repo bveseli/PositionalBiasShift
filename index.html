@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Evaluating the Knowledge Base Completion Potential of GPT</title>
+    <link rel="stylesheet" href="./GPTforKBC_files/all.css">
+</head>
+
+<body>
+
+<main role="main" id="main" ,="" class="container">
+    <br>
+    <div class="jumbotron" style="text-align: center">
+        <h1 >Evaluating the Knowledge Base Completion Potential of GPT</h1>
+        <a href="https://bveseli.github.io" target="_blank">Blerta Veseli¹</a>,
+        <a href="http://simonrazniewski.com" target="_blank">Simon Razniewski²</a>,
+        <a href="https://research.vu.nl/en/persons/jan-christoph-kalo" target="_blank">Jan-Christoph Kalo³</a>,
+		<a href="https://people.mpi-inf.mpg.de/~weikum/" target="_blank">Gerhard Weikum¹</a><br>
+        <br>
+        <p>
+            <a href="https://www.mpi-inf.mpg.de/departments/databases-and-information-systems" target="_blank">Max Planck Institute for Informatics¹</a>,
+            <a href="https://www.bosch-ai.com" target="_blank"> Bosch Center for AI²</a>,
+            <a href="https://www.uva.nl/en" target="_blank"> University of Amsterdam³</a>
+
+        </p>
+        <br><br>
+        <a href="https://2023.emnlp.org" target="_blank">EMNLP Findings 2023, Singapore</a>  <br>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="column">
+            <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2310.14771" target="_blank">Paper</a></p>
+		</div>
+		<div class="column">
+            <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/bveseli/LMsForKBC/tree/main/data/WD_Known" target="_blank">Dataset</a></p>
+		</div>
+		<div class="column">
+            <p class="mb-5"><a class="btn btn-large btn-light" href="" target="_blank">Code</a></p>
+		</div>
+	</div>
+
+
+
+
+
+  <div class="row">
+    <div class="col-12 col-md-12">
+
+        <h2 style="text-align:center">
+Abstract
+	</h2>
+
+<p class="text-justify">
+
+Structured knowledge bases (KBs) are an asset for search engines and other applications, but are inevitably incomplete. Language models (LMs) have been proposed for unsupervised knowledge base completion (KBC), yet, their ability to do this at scale and with high accuracy remains an open question. Prior experimental studies mostly fall short because they only eval- uate on popular subjects, or sample already ex- isting facts from KBs. In this work, we perform a careful evaluation of GPT’s potential to com- plete the largest public KB: Wikidata. We find that, despite their size and capabilities, mod- els like GPT-3, ChatGPT and GPT-4 do not achieve fully convincing results on this task. Nonetheless, they provide solid improvements over earlier approaches with smaller LMs. In particular, we show that, with proper threshold- ing, GPT-3 enables to extend Wikidata by 27M facts at 90% precision.
+        </p>
+    </div>
+ </div>
+ 
+ 
+ <div class="row">
+    <div class="col-12 col-md-12">
+	   <h4 style="text-align:center">
+	   Motivation and Problem
+	   	</h4>
+       <figure style="text-align:center">
+       <img  src="./GPTforKBC_files/motivation_problem.png" width="60%" class="img-responsive">
+       <figcaption style="text-align:left" >Knowledge Bases (KBs) are essential for search engines and other applications, but inevitably incomplete. Language Models (LMs) have recently been proposed for KB completion because of their implicit access to a large amount of implict knowledge. In KBs, the emphasis is placed on completeness and correctness, but: <b>are LMs able to complete KBs at scale and with near-human precision (>90%)?</b> .
+	   </figcaption>
+       </figure>
+   </div>
+ </div>
+ 
+ 
+ 
+ <div class="row">
+    <div class="col-12 col-md-12">
+	   <h4 style="text-align:center">
+	   Method
+	   	</h4>
+       <figure style="text-align:center">
+       <img  src="./GPTforKBC_files/method.png" width="60%" class="img-responsive">
+       <figcaption style="text-align:left" >To query the GPT models, we utilize instruction-free prompts listed in the appendix. Specifically for GPT-3, we follow the prompt setup of (Cohen et al., 2023), which is based on an instruction-free prompt entirely consisting of 8 randomly sampled and manually checked examples. </b> .
+	   </figcaption>
+       </figure>
+   </div>
+ </div>
+
+
+ <div class="row">
+    <div class="col-12 col-md-12">
+	   <h4 style="text-align:center">
+	   Dataset
+	   	</h4>
+       <figure style="text-align:center">
+       <img  src="./GPTforKBC_files/table.png" width="60%" class="img-responsive">
+       <figcaption style="text-align:left" ><b>WD-KNOWN</b> is a benchmark for fact extraction (SP->O). It focuses on long-tail knowledge, e.g. entities without Wikipedia-Pages.</b> .
+	   </figcaption>
+       </figure>
+   </div>
+ </div>
+
+
+ <div class="row">
+    <div class="col-12 col-md-12">
+	   <h4 style="text-align:center">
+	   Automated Evaluation
+	   	</h4>
+       <figure style="text-align:center">
+       <img  src="./GPTforKBC_files/EMNLP_Tabelle_1_automated_eval.png" width="60%" class="img-responsive">
+       <figcaption style="text-align:left" >This table shows the results on our <i>retain-all</i>-setting, where we computed precision, recall and F1 on all samples per relation. It can be shown that none of the GPT models achieves precision of over 90%, except GPT-3 on relation writtenIn. We therefore, in a second step, sort predictions by confidence and evaluate by recall at precision 95% and 90% (R@P95 and R@P90). To do so, we sort the pre- dictions for all subjects in a relation by the model’s probability on the first generated token, then com- pute the precision at each point of this list, and return the maximal fraction of the list covered while maintaining precision greater than the desired value. We threshold only GPT-3, because only GPT-3’s token probabilities are directly ac- cessable in the API, and because the chat-aligned models do not outperform it in the retain-all setting.
+	   </figcaption>
+       </figure>
+	   
+       <figure style="text-align:center">
+       <img  src="./GPTforKBC_files/EMNLP_Tabelle_3_automated_eval_precision_thresholding.png" width="60%" class="img-responsive">
+       <figcaption style="text-align:left" >This second table shows our main results when evaluating by recall at precision 95% and 90% on the 22 best-performing relations. We find that on many relations, GPT-3 can reproduce existing statements at over 95% precision, and there are significant gains over the smaller BERT-large model. At the same time, it should be noted that (Sun et al., 2023) observed that for large enough models, parameter scaling does not improve performance further, so it is well possible that these scores represent a ceiling w.r.t. model size.
+	   </figcaption>
+       </figure>
+	   
+	   <h5>Conclusion</h5>
+	   <p>While precision is viable for language-related relations, e.g. writtenIn, nativeLanguage, it is degrading for other relations (e.g. developedBy, namedAfter, playsInstrument). All in all the achieved precision is insufficient on long-tail knowledge and therefore not usable for KB completion.</p>
+	   
+	      
+   </div>
+ </div>
+
+
+ <div class="row">
+    <div class="col-12 col-md-12">
+	   <h4 style="text-align:center">
+	   Knowledge Base Completion
+	   	</h4>
+       <figure style="text-align:center">
+       <img  src="./GPTforKBC_files/EMNLP_Tabelle_2_manual_eval.png" width="60%" class="img-responsive">
+       <figcaption style="text-align:left" > To perform KB completion GPT has to generate <i>novel</i> facts, that are not in the KB, i.e. Wikidata, yet. To evaluate this setting, we conducted a manual assessment of 800 out-of-kb facts for the 16 best-performing relations. This table shows our main results when using precision-oriented thresholding. The fourth column shows the percentage of subjects for which we obtained high-confidence predictions, the fifth how these translates into absolute statement numbers, and the sixth shows the percentages that were manually verified as correct (sampled). In the last column, we show how this number relates to the current size of the relation. We find that manual precision surpasses 90% for 5 relations, and 80% for 11. Notably, the best- performing relations are mostly related to socio- demographic properties (languages, citizenship). In absolute terms, we find a massive number of high-accuracy statements that could be added to the writtenIn relation (18M), followed by spo- kenLanguage and nativeLanguage (4M each). In relative terms, the additions could increase the existing relations by up to 1200%, though there is a surprising divergence (4 relations over 100%, 11 relations below 20%).
+	   </figcaption>
+       </figure>
+   </div>
+ </div>
+ 
+ <div class="jumbotron">
+    <div class="col-12 col-md-12">
+	   <h4 style="text-align:center">
+	   Conclusion
+	   	</h4>
+		<p>
+			<ol>
+			  <li>Out of the box, GPT models do not achieve the required precision for KB completion on long-tail knowledge.
+</li>
+			  <li>Nevertheless, solid results are achieved for language-related and socio-demographic relations.</li>
+			  <li>Simple thresholding can extend the Wikidata KB at high precision (>90%) 
+and add a total of 27M high-accuracy statements for 41 common relations.
+</li>
+			</ol>
+			
+		</p>
+   </div>
+ </div>
+
+
+
+
+    <h2>Citation</h2>
+    <pre class="bg-light" style="padding: 5px 10.5px;">@inproceedings{veseli2023emnlp,
+    title = {Evaluating the Knowledge Base Completion Potential for GPT},
+    author = {Veseli, Blerta and Razniewski, Simon and Kalo, Jan-Christoph and Weikum, Gerhard},
+    booktitle = {Empirical Methods on Natrual Language Processing ({EMNLP})},
+    month = {December},
+    year = {2023},
+}</pre>
+</main>
+
+
+
+</body></html>
