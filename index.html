@@ -56,7 +56,7 @@ Large Language Models (LLMs) often struggle to use information across long input
     </div>
  </div>
  
- 
+ <!---
  <div class="row">
     <div class="col-12 col-md-12">
        <figure style="text-align:center">
@@ -66,8 +66,54 @@ Large Language Models (LLMs) often struggle to use information across long input
        </figure>
    </div>
  </div>
+-->
+
+
  
- 
+<div class="row">
+	<div class="col-12 col-md-12">
+		<section id="findings">
+		  <h2>Findings</h2>
+		
+		  <ol class="findings">
+		    <li>
+		      <h3>Defining relative input lengths.</h3>
+		      <p>Analysis of positional biases using relative input length (proportion of a model’s context window) rather than absolute lengths across models.</p>
+		    </li>
+
+		    <li>
+		      <h3>Positional biases are consistent across models when analyzed relative to a model's context window size.</h3>
+		    </li>
+		
+		    <li>
+		      <h3>LiM is strongest in input lengths up to 50% of a models context window size.</h3>
+		      <figure>
+		        <img src="./figures/quantitative_measure_of_biases-2-1.pn" alt="What the figure shows">
+		      </figure>
+		      <p>Brief interpretation of the figure.</p>
+		    </li>
+		
+		    <li>
+		      <h3>LiM is strongest in input lengths up to 50% of a models context window size.</h3>
+		      <figure>
+		        <img src="./figures/v_shapes-3-1.png" alt="What the figure shows">
+		      </figure>
+		      <p>Brief interpretation of the figure.</p>
+		    </li>
+		
+		    <li>
+		      <h3>With growing input size, primacy bias increasingly collapses, while the recency bias remains stable. This results in a more distance-based bias, i.e. accuracy higher when evidence is nearer the end.</h3>
+		      <figure>
+		        <img src="./figures/pos_bias_on_cond_probs-2-1.png" alt="What the figure shows">
+		      </figure>
+		      <p>Brief interpretation of the figure.</p>
+		    </li>
+		  </ol>
+		</section>
+	</div>
+</div>
+	
+<!---
  <div class="row">
     <div class="col-12 col-md-12">
 		<ul>
@@ -79,7 +125,7 @@ Large Language Models (LLMs) often struggle to use information across long input
 		</ul>
    </div>
  </div>
-
+-->
 
     <h2>Citation</h2>
     <pre class="bg-light" style="padding: 5px 10.5px;">	@inproceedings{veseli2025positional,
@@ -93,6 +139,7 @@ Large Language Models (LLMs) often struggle to use information across long input
 
 
 </body></html>
+
 
 
 
