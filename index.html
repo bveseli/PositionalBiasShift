@@ -2,8 +2,8 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Evaluating the Knowledge Base Completion Potential of GPT</title>
-    <link rel="stylesheet" href="./GPTforKBC_files/all.css">
+    <title>Positional Biases Shift as Inputs Approach Context Window Limits</title>
+    <link rel="stylesheet" href="./files/all.css">
 </head>
 
 <body>
@@ -11,31 +11,31 @@
 <main role="main" id="main" ,="" class="container">
     <br>
     <div class="jumbotron" style="text-align: center">
-        <h1 >Evaluating the Knowledge Base Completion Potential of GPT</h1>
+        <h1 >Positional Biases Shift as Inputs Approach Context Window Limits</h1>
         <a href="https://bveseli.github.io" target="_blank">Blerta Veseli¹</a>,
-        <a href="http://simonrazniewski.com" target="_blank">Simon Razniewski²</a>,
-        <a href="https://research.vu.nl/en/persons/jan-christoph-kalo" target="_blank">Jan-Christoph Kalo³</a>,
-		<a href="https://people.mpi-inf.mpg.de/~weikum/" target="_blank">Gerhard Weikum¹</a><br>
+        <a href="http://simonrazniewski.com" target="_blank">Julian Chibane²</a>,
+        <a href="https://research.vu.nl/en/persons/jan-christoph-kalo" target="_blank">Mariya Toneva³</a>,
+		<a href="https://people.mpi-inf.mpg.de/~weikum/" target="_blank">Alexander Koller¹</a><br>
         <br>
         <p>
-            <a href="https://www.mpi-inf.mpg.de/departments/databases-and-information-systems" target="_blank">Max Planck Institute for Informatics¹</a>,
-            <a href="https://www.bosch-ai.com" target="_blank"> Bosch Center for AI²</a>,
-            <a href="https://www.uva.nl/en" target="_blank"> University of Amsterdam³</a>
+            <a href="https://www.mpi-inf.mpg.de/departments/databases-and-information-systems" target="_blank"> Saarland Informatics Campus, Saarland University, Saarbrücken¹</a>,
+            <a href="https://www.bosch-ai.com" target="_blank"> Max Planck Institute for Informatics²</a>,
+            <a href="https://www.uva.nl/en" target="_blank"> Max Planck Institute for Software Systems³</a>
 
         </p>
         <br><br>
-        <a href="https://2023.emnlp.org" target="_blank">EMNLP Findings 2023, Singapore</a>  <br>
+        <a href="https://colmweb.org" target="_blank">COLM 2025, Montreal</a>  <br>
     </div>
 
     <div class="row justify-content-center">
         <div class="column">
-            <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2310.14771" target="_blank">Paper</a></p>
+            <p class="mb-5"><a class="btn btn-large btn-light" href="test" target="_blank">Paper</a></p>
 		</div>
 		<div class="column">
-            <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/bveseli/LMsForKBC/tree/main/data/WD_Known" target="_blank">Dataset</a></p>
+            <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/bveseli/positional-bias-shift" target="_blank">Dataset</a></p>
 		</div>
 		<div class="column">
-            <p class="mb-5"><a class="btn btn-large btn-light" href="" target="_blank">Code</a></p>
+            <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/bveseli/positional-bias-shift" target="_blank">Code</a></p>
 		</div>
 	</div>
 
@@ -52,8 +52,7 @@ Abstract
 
 <p class="text-justify">
 
-Structured knowledge bases (KBs) are an asset for search engines and other applications, but are inevitably incomplete. Language models (LMs) have been proposed for unsupervised knowledge base completion (KBC), yet, their ability to do this at scale and with high accuracy remains an open question. Prior experimental studies mostly fall short because they only eval- uate on popular subjects, or sample already ex- isting facts from KBs. In this work, we perform a careful evaluation of GPT’s potential to com- plete the largest public KB: Wikidata. We find that, despite their size and capabilities, mod- els like GPT-3, ChatGPT and GPT-4 do not achieve fully convincing results on this task. Nonetheless, they provide solid improvements over earlier approaches with smaller LMs. In particular, we show that, with proper threshold- ing, GPT-3 enables to extend Wikidata by 27M facts at 90% precision.
-        </p>
+Large Language Models (LLMs) often struggle to use information across long inputs. Prior work has identified positional biases like the Lost in the Middle (LiM) effect—better performance when key information appears at the beginning (primacy) or end (recency) rather than in the middle—but long-context studies have not consistently replicated these effects. We address this by analyzing input length relative to each model’s context window and find that LiM is strongest when inputs occupy up to 50% of that window. Beyond that point, primacy weakens while recency remains relatively stable, effectively eliminating LiM and revealing a distance-based bias where performance is better when relevant information is closer to the end. Our results also suggest that successful retrieval is a prerequisite for reasoning, and that positional biases in reasoning are largely inherited from retrieval, with implications for long-context tasks, benchmark design, and evaluation.        </p>
     </div>
  </div>
  
@@ -174,3 +173,4 @@ and add a total of 27M high-accuracy statements for 41 common relations.
 
 
 </body></html>
+
